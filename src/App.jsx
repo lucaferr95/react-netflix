@@ -6,7 +6,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import MyNavbar from "./assets/components/Navbar";
 import MyFooter from "./assets/components/Footer";
 import Primopezzo from "./assets/components/Primopezzo";
-import CaroSection from "./assets/components/Carousel";
+import CaroSection from "./assets/components/CarouselST";
 
 function App() {
 
