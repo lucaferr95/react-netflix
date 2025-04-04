@@ -3,6 +3,7 @@ import "./App.css";
 import "./index.css";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import MyNavbar from "./assets/components/Navbar";
 import MyFooter from "./assets/components/Footer";
 import Primopezzo from "./assets/components/Primopezzo";
@@ -27,6 +28,7 @@ function App() {
    <CaroFG/>
    <CaroDN/>
    <CarouselMeme/>
+
    <ProfileComponent/>
    <MyFooter/>
     </>

@@ -1,34 +1,71 @@
 [
   {
-    "title": "Cado Malato (Epistudents's story)",
-    "poster": "https://www.entemutuomilano.it/wp-content/uploads/2022/12/shutterstock_1672921831.jpg"
+    "title": "Where is the Pope(The comploct of our days)",
+    "poster": "https://statics.cedscdn.it/photos/MED_HIGH/78/56/8637856_05093406_falsissimo.jpg",
+    "description": "Il papa è veramente vivo?"
   },
   {
     "title": "Absolute poverty (Luca's story)",
-    "poster": "https://media.istockphoto.com/id/971197892/it/foto/apri-a-mano-svuota-un-portafoglio.jpg?s=612x612&w=0&k=20&c=yMhZhiJinYGYMnVFdmZJHVwmMaBvV8Xz6gSwX4wrB-s="
+    "poster": "https://media.istockphoto.com/id/971197892/it/foto/apri-a-mano-svuota-un-portafoglio.jpg?s=612x612&w=0&k=20&c=yMhZhiJinYGYMnVFdmZJHVwmMaBvV8Xz6gSwX4wrB-s=",
+  "description": "La storia di un uomo che nasce povero ma durante il cammino della sua vita...rimane comunque povero"
   },
   {
     "title": "The lemons, my lady",
-    "poster": "https://barletta.gocity.it/library/media/limoni_meme1.jpg"
+    "poster": "https://barletta.gocity.it/library/media/limoni_meme1.jpg",
+    "description": "La triste storia di una donna che dimenticò i limoni dal fruttivendolo"
   },
   {
     "title": "Quasi amici (una storia che poteva finire meglio)",
-    "poster": "https://www.musicapuntoamici.it/blog/wp-content/uploads/2020/02/Morgan-e-Bugo-un-aspetto-inaccettabile-della-loro-lite.jpg"
+    "poster": "https://www.musicapuntoamici.it/blog/wp-content/uploads/2020/02/Morgan-e-Bugo-un-aspetto-inaccettabile-della-loro-lite.jpg",
+  "description": "Un uomo scrive una lettera per il suo migliore amico ma questo segnerà la fine dell'amicizia"
+  },
+
+  {
+    "title": "Amore disperato",
+    "poster": "https://www.superguidatv.it/wp-content/uploads/2019/05/mark-caltagirone.jpg",
+    "description": "La tormentata love story tra una donna e un'entita non identificata"
+  },
+  {
+    "title": "Non mi sento a mio agio",
+    "poster": "https://dimages2.corriereobjects.it/files/main_image_mobile/uploads/2024/12/11/675943cd4ab35.jpeg",
+    "description": "La storia di un uomo a cui venne dato del lei"
+  },
+
+  {
+    "title": "Per me è la cipolla",
+    "poster": "https://www.bellacanzone.it/wp-content/uploads/2020/01/per-me-e-la-cipolla.jpg",
+    "description": "La storia di uno spavaldo concorrente che ha osato sfidare il conduttore in diretta"
+  },
+  {
+    "title": "Un'errore di comunicazione",
+    "poster": "https://images.dissapore.com/wp-content/uploads/2023/12/ferragni-pandoro-1-e1702911955417.png?width=1280&height=720&quality=20",
+    "description": "Storia natalizia di un'influencer sbadatina che provoca qualche danno"
+  },
+ 
+  {
+    "title": "Cado Malato (Epistudents's story)",
+    "poster": "https://www.entemutuomilano.it/wp-content/uploads/2022/12/shutterstock_1672921831.jpg",
+    "description": "La storia che vivono dei poveri studenti ogni giorno"
   },
   {
     "title": "Cado Malato (Epistudents's story)",
-    "poster": "https://www.entemutuomilano.it/wp-content/uploads/2022/12/shutterstock_1672921831.jpg"
+    "poster": "https://www.entemutuomilano.it/wp-content/uploads/2022/12/shutterstock_1672921831.jpg",
+    "description": "La storia che vivono dei poveri studenti ogni giorno"
   },
   {
-    "title": "Absolute poverty (Luca's story)",
-    "poster": "https://media.istockphoto.com/id/971197892/it/foto/apri-a-mano-svuota-un-portafoglio.jpg?s=612x612&w=0&k=20&c=yMhZhiJinYGYMnVFdmZJHVwmMaBvV8Xz6gSwX4wrB-s="
+    "title": "Cado Malato (Epistudents's story)",
+    "poster": "https://www.entemutuomilano.it/wp-content/uploads/2022/12/shutterstock_1672921831.jpg",
+    "description": "La storia che vivono dei poveri studenti ogni giorno"
   },
   {
-    "title": "The lemons, my lady",
-    "poster": "https://barletta.gocity.it/library/media/limoni_meme1.jpg"
+    "title": "Cado Malato (Epistudents's story)",
+    "poster": "https://www.entemutuomilano.it/wp-content/uploads/2022/12/shutterstock_1672921831.jpg",
+    "description": "La storia che vivono dei poveri studenti ogni giorno"
   },
   {
-    "title": "Quasi amici (una storia che poteva finire meglio)",
-    "poster": "https://www.musicapuntoamici.it/blog/wp-content/uploads/2020/02/Morgan-e-Bugo-un-aspetto-inaccettabile-della-loro-lite.jpg"
+    "title": "Cado Malato (Epistudents's story)",
+    "poster": "https://www.entemutuomilano.it/wp-content/uploads/2022/12/shutterstock_1672921831.jpg",
+    "description": "La storia che vivono dei poveri studenti ogni giorno"
   }
+
 ]
