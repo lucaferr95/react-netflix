@@ -13,6 +13,9 @@ import CaroFG from "./assets/components/CarouselFG";
 import CaroDN from "./assets/components/CarouselDN";
 import ProfileComponent from "./assets/components/Profile";
 
+import CarouselMeme from "./assets/components/CarouselMeme";
+
+
 function App() {
 
 
@@ -23,6 +26,7 @@ function App() {
    <CaroST/>
    <CaroFG/>
    <CaroDN/>
+   <CarouselMeme/>
    <ProfileComponent/>
    <MyFooter/>
     </>

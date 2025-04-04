@@ -2,7 +2,7 @@ import React from "react";
 
 const ProfileComponent = function () {
   return (
-    <div className="container bg-dark my-1 w-100" data-bs-theme="dark ">
+    <div className="container-fluid bg-dark my-1 " data-bs-theme="dark ">
 
       <div className="row justify-content-center">
         <div className="col-12 col-md-8 col-lg-6">
