@@ -11,6 +11,7 @@ import CaroST from "./assets/components/CarouselST";
 import CaroFG from "./assets/components/CarouselFG";
 
 import CaroDN from "./assets/components/CarouselDN";
+import ProfileComponent from "./assets/components/Profile";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
    <CaroST/>
    <CaroFG/>
    <CaroDN/>
+   <ProfileComponent/>
    <MyFooter/>
     </>
   )
