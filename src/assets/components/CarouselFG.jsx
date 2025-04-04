@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
 // URL della serie ST
-const STRANGERTHINGS = "https://www.omdbapi.com/?i=tt3896198&apikey=339d3413&s=Stranger%20Things";
+const FAMILYGUY = "https://www.omdbapi.com/?i=tt3896198&apikey=339d3413&s=family%20guy";
 
 //Funzione a classe
-class CaroST extends Component {
+class CaroFG extends Component {
   state = {
     filmsST: [],
     loading: true,
@@ -13,7 +13,7 @@ class CaroST extends Component {
 
   //Fetch per ottenere i dati della serie
   getFilmST = () => {
-    fetch(STRANGERTHINGS)
+    fetch(FAMILYGUY)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -54,10 +54,10 @@ class CaroST extends Component {
       //Struttura del mio vecchio carosello con qualche
         <section id="caroFilms" class="d-flex flex-column gy-5 bg-black">
         <div>
-        <h4 className="nosifer-regular text-danger m-3">STRANGER THINGS</h4>
+        <h4 className="griffin-font text-info m-3">I GRIFFIN</h4>
 
         </div>
-        <div id="carousel2" className="carousel slide d-block ">
+        <div id="carousel3" className="carousel slide d-block ">
         
         <div className="carousel-inner">
         
@@ -75,7 +75,7 @@ class CaroST extends Component {
                     }}
                     alt={film.Title}
                   />
-                  <h5 className="text-danger nosifer-regular ">{film.Title}</h5>
+                  <h5 className="text-info griffin-font">{film.Title}</h5>
                 </div>
               ))}
             </div>
@@ -83,7 +83,7 @@ class CaroST extends Component {
         
           <div className="carousel-item">
             <div className="row d-flex flex-nowrap row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gy-2">
-              {filmsST.slice(5,9).map((film, index) => (
+              {filmsST.slice(5,10).map((film, index) => (
                 <div className="col" key={film.imdbID}>
                   <img
                     src={film.Poster} 
@@ -95,7 +95,7 @@ class CaroST extends Component {
                     }}S
                     alt={film.Title}
                   />
-                  <h5 className="nosifer-regular text-danger">{film.Title}</h5>
+                  <h5 className="griffin-font text-info">{film.Title}</h5>
                 </div>
               ))}
             </div>
@@ -104,7 +104,7 @@ class CaroST extends Component {
         <button
           className="carousel-control-prev"
           type="button"
-          data-bs-target="#carousel2"
+          data-bs-target="#carousel3"
           data-bs-slide="prev"
         >
           <span
@@ -116,7 +116,7 @@ class CaroST extends Component {
         <button
           className="carousel-control-next"
           type="button"
-          data-bs-target="#carousel2"
+          data-bs-target="#carousel3"
           data-bs-slide="next"
         >
           <span
@@ -131,4 +131,4 @@ class CaroST extends Component {
   }
 }
 
-export default CaroST;
+export default CaroFG;
