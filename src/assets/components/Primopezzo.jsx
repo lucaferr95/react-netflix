@@ -61,5 +61,5 @@ const Primopezzo = function() {
         </div>
     );
 }
-
+. 
 export default Primopezzo;
