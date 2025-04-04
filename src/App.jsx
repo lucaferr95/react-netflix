@@ -10,6 +10,8 @@ import Primopezzo from "./assets/components/Primopezzo";
 import CaroST from "./assets/components/CarouselST";
 import CaroFG from "./assets/components/CarouselFG";
 
+import CaroDN from "./assets/components/CarouselDN";
+
 function App() {
 
 
@@ -19,6 +21,7 @@ function App() {
    <Primopezzo/>
    <CaroST/>
    <CaroFG/>
+   <CaroDN/>
    <MyFooter/>
     </>
   )
