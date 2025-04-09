@@ -1,6 +1,9 @@
 import { Navbar, Container, Nav, NavDropdown, Button } from "react-bootstrap";
+import { Link, useLocation } from "react-router-dom";
 
 const MyNavbar = () => {
+    const location = useLocation()
+    console.log('LOCATION', location)
   return (
     <Navbar expand="lg" bg="dark" variant="dark" className="border-bottom border-body" data-bs-theme="dark">
       <Container fluid>
@@ -15,11 +18,11 @@ const MyNavbar = () => {
         <Navbar.Toggle aria-controls="main-navbar" />
         <Navbar.Collapse id="main-navbar">
           <Nav className="me-auto mb-2 mb-lg-0">
-            <Nav.Link href="#" active>Home</Nav.Link>
-            <Nav.Link href="#">Tv Shows</Nav.Link>
-            <Nav.Link href="#">Movies</Nav.Link>
-            <Nav.Link href="#">Recently Added</Nav.Link>
-            <Nav.Link href="#">My List</Nav.Link>
+            <Link className={ location.pathname === '/' ? 'nav-link active' : 'nav-link'}to="/">Home</Link>
+            <Link className= {location.pathname === '/tvshows' ? 'nav-link active' : 'nav-link'}to="tvshows">Tv Shows</Link>
+            <Link className={location.pathname === '/griffin' ? 'nav-link active' : 'nav-link'}to="griffin">Recently Added</Link>
+            <Link className={location.pathname === '/mylist' ? 'nav-link active' : 'nav-link'}to="mylist"> My list</Link>
+           
           </Nav>
 
           <div className="d-flex align-items-center gap-3 mx-2">
@@ -60,7 +63,7 @@ const MyNavbar = () => {
               id="profileDropdown"
               align="end"
             >
-              <NavDropdown.Item href="profile.html">Profilo</NavDropdown.Item>
+           <Link className={location.pathname === '/profilo' ? 'nav-link active' : 'nav-link'}to="profilo"> Profilo</Link>
               <NavDropdown.Item href="#">Settings</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#">Logout</NavDropdown.Item>

@@ -1,12 +1,13 @@
 const Primopezzo = function() {
     return (
-        <div className="container-fluid d-flex justify-content-between align-items-center p-0 bg-dark text-light" data-bs-theme="dark">
-            <div className="d-flex align-items-center">
-                <h1 className="m-3">TV Shows</h1>
+    
+        <div className="container-fluid d-flex justify-content-between align-items-center  p-3 bg-dark text-light " data-bs-theme="dark">
+            <div className="d-flex align-items-center ">
+                <h1 className="m-0">TV Shows</h1>
                 <div className="dropdown">
                     <button
                         type="button"
-                        className="btn btn-dark dropdown-toggle bg-black border border-light rounded-0"
+                        className="btn btn-dark dropdown-toggle bg-black border border-light rounded-0 m-2"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                     >
@@ -59,6 +60,7 @@ const Primopezzo = function() {
                 </a>
             </div>
         </div>
+    
     );
 }
 

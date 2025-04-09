@@ -27,7 +27,7 @@ const ProfileComponent = function () {
           <div className="mt-4">
             <label className="form-label text-light">Language:</label>
             <select className="form-select bg-dark text-white">
-              <option>English</option>
+              <option>Napoletano</option>
               <option>Italiano</option>
               <option>Français</option>
             </select>
