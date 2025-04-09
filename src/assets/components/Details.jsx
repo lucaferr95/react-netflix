@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Spinner, Alert, Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
+import { Alert, Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
 
 const MovieDetails = () => {
   const { movieId } = useParams(); // Prende il movieId dalla URL
@@ -18,40 +18,46 @@ const MovieDetails = () => {
   const AUTH_TOKEN = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2Y0ZWJhNzgxYjBkZDAwMTUwYTdhM2UiLCJpYXQiOjE3NDQyMDk4MjYsImV4cCI6MTc0NTQxOTQyNn0.dQPLbpvuTLXrohSc8CePEr1AC2qwaNPwvK9bL3OfOAs"; // Sostituisci con il tuo token di autenticazione
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        // Fetch dettagli del film da OMDb
-        const movieRes = await fetch(OMDB_URL);
-        if (!movieRes.ok) throw new Error("Errore nel recupero dei dettagli del film");
-
-        const movieData = await movieRes.json();
+    setIsLoading(true);
+    fetch(OMDB_URL)
+      .then((response) => {
+        if (!response.ok) {
+          setError("Errore nel recupero dei dettagli del film");
+          return;
+        }
+        return response.json();
+      })
+      .then((movieData) => {
         setMovie(movieData);
-
-        // Fetch commenti del film
-        const commentsRes = await fetch(COMMENTS_URL, {
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2Y0ZWJhNzgxYjBkZDAwMTUwYTdhM2UiLCJpYXQiOjE3NDQyMDk4MjYsImV4cCI6MTc0NTQxOTQyNn0.dQPLbpvuTLXrohSc8CePEr1AC2qwaNPwvK9bL3OfOAs ${AUTH_TOKEN}`,
-          },
-        });
-        if (!commentsRes.ok) throw new Error("Errore nel recupero dei commenti");
-
-        const commentsData = await commentsRes.json();
-        setComments(commentsData);
         setError(null);
-      } catch (err) {
-        console.error("Errore durante il fetch dei dati:", err);
-        setError("Errore durante il caricamento");
-      } finally {
+        fetch(COMMENTS_URL, {
+          headers: {
+            Authorization: AUTH_TOKEN,
+          },
+        })
+          .then((commentsRes) => {
+            if (!commentsRes.ok) {
+              setError("Errore nel recupero dei commenti");
+              return;
+            }
+            return commentsRes.json();
+          })
+          .then((commentsData) => {
+            setComments(commentsData);
+            setIsLoading(false);
+          })
+          .catch(() => {
+            setError("Errore durante il recupero dei commenti");
+            setIsLoading(false);
+          });
+      })
+      .catch(() => {
+        setError("Errore durante il recupero dei dettagli del film");
         setIsLoading(false);
-      }
-    };
-
-    fetchData();
+      });
   }, [movieId]);
 
-  // Funzione per inviare un nuovo commento
-  const handleCommentSubmit = async (e) => {
+  const handleCommentSubmit = (e) => {
     e.preventDefault();
     const newCommentData = {
       comment: newComment,
@@ -59,32 +65,37 @@ const MovieDetails = () => {
       elementId: movieId,
     };
 
-    try {
-      const response = await fetch(COMMENTS_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${AUTH_TOKEN}`,
-        },
-        body: JSON.stringify(newCommentData),
+    fetch(COMMENTS_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: AUTH_TOKEN,
+      },
+      body: JSON.stringify(newCommentData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          setError("Errore nell'invio del commento");
+          return;
+        }
+        return response.json();
+      })
+      .then((updatedComments) => {
+        setComments(updatedComments);
+        setNewComment("");
+        setRating("1");
+      })
+      .catch(() => {
+        setError("Errore nell'invio del commento");
       });
-
-      if (!response.ok) throw new Error("Errore nell'invio del commento");
-      const updatedComments = await response.json();
-      setComments(updatedComments); // Ricarica i commenti
-      setNewComment(""); // Reset commento
-      setRating("1"); // Reset rating
-    } catch (err) {
-      console.error("Errore nell'invio del commento:", err);
-      setError("Errore durante l'invio del commento");
-    }
   };
 
-  if (isLoading) return <Spinner animation="border" variant="danger" className="m-5" />;
+  if (isLoading) return <div className="m-5">Caricamento in corso...</div>;
   if (error) return <Alert variant="danger" className="m-5">{error}</Alert>;
 
   return (
-    <Container className="my-4">
+    <main className='bg-dark d-flex flex-column min-vh-100'>
+    <Container className="my-4 bg-info py-5 my-2">
       <Row>
         <Col md={4}>
           <Card>
@@ -146,6 +157,7 @@ const MovieDetails = () => {
         </Col>
       </Row>
     </Container>
+    </main>
   );
 };
 
