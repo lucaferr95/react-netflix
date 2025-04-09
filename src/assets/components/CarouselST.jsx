@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 // URL della serie ST
+import { Link } from 'react-router-dom';
 const STRANGERTHINGS = "https://www.omdbapi.com/?i=tt3896198&apikey=339d3413&s=Stranger%20Things";
 
 //Funzione a classe
@@ -76,6 +77,9 @@ class CaroST extends Component {
                     alt={film.Title}
                   />
                   <h5 className="text-danger nosifer-regular ">{film.Title}</h5>
+                  <Link to={`/movie/${film.imdbID}`} className="btn btn-primary">
+          Dettagli
+        </Link>
                 </div>
               ))}
             </div>

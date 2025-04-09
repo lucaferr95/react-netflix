@@ -16,6 +16,7 @@ import ProfileComponent from "./assets/components/Profile";
 import NotFound from "./assets/components/NotFound";
 import MyNavbar from "./assets/components/Navbar";
 import MyFooter from "./assets/components/Footer";
+import MovieDetails from "./assets/components/Details";
   function App() {
     return (
       <BrowserRouter>
@@ -65,7 +66,9 @@ import MyFooter from "./assets/components/Footer";
     </main>
   }
 />
-                  
+                     {/* queste sopra vengono definite ROTTA STATICHE */}
+                     <Route path="/movie/:movieId" element={<MovieDetails />} />
+            {/* questa sopra viene definita ROTTA PARAMETRICA */}
                
               <Route path="*" element={<NotFound />} />
             </Routes>
