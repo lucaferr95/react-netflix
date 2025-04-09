@@ -2,6 +2,10 @@ import React from "react";
 
 
 const MyHome = function () {
+  const handleRedirect = () => {
+    // Reindirizza alla pagina statica, come un URL normale
+    window.location.href = "https://www.paypal.com/paypalme/lucaf95"; // Puoi usare qualsiasi URL
+  };
   return (
     <main className="d-flex flex-column min-vh-100">
     
@@ -13,11 +17,12 @@ const MyHome = function () {
 
             <div className="d-flex justify-content-center">
               <div className="d-flex flex-column flex-md-row align-items-center fs-1 mt-5">
-                <img
-                  src="/public\Netflix images\netflix_logo.png"
-                  alt="Profile"
-                  className="img-fluid rounded-circle w-50"
-                />
+              <img
+  src="/Netflix images/netflix_logo.png"
+  alt="Profile"
+  className="img-fluid rounded-circle w-50"
+/>
+
                 <div className="text-white ms-md-3 mt-3 mt-4 md-0">
                   <h4 className="mt-4">A partire da 6,99 €. Disdici quando vuoi.
 
@@ -37,9 +42,9 @@ const MyHome = function () {
       />
     </div>
     <div className="col-12 col-md-3 text-md-end">
-      <button type="submit" className="btn btn-danger w-100">
-        Inizia
-      </button>
+    <button type="button" className="btn btn-danger w-100" onClick={handleRedirect}>
+                    Inizia
+                  </button>
     </div>
   </div>
 </form>

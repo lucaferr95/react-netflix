@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
+import { Button } from "bootstrap/dist/js/bootstrap.bundle.min";
 // URL della serie ST
 const DEATHNOTE= "https://omdbapi.com/?i=tt3896198&apikey=339d3413&s=death%20note";
 
@@ -62,7 +63,7 @@ class CaroDN extends Component {
         <div className="carousel-inner">
         
           <div className="carousel-item active">
-            <div className="row d-flex flex-nowrap row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gy-2">
+            <div className="row d-flex flex-nowrap row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gy-2 ">
               {filmsST.slice(0, 4).map((film, index) => (
                 <div className="col" key={film.imdbID}>
                   <img
@@ -76,6 +77,9 @@ class CaroDN extends Component {
                     alt={film.Title}
                   />
                   <h5 className="text-light opacity-75 dnf">{film.Title}</h5>
+                   <Link to={`/movie/${film.imdbID}`} className="btn btn-primary">
+                            Dettagli
+                          </Link>
                 </div>
               ))}
             </div>
@@ -96,6 +100,9 @@ class CaroDN extends Component {
                     alt={film.Title}
                   />
                   <h5 className="dnf text-light opacity-75">{film.Title}</h5>
+                  <Link to={`/movie/${film.imdbID}`} className="btn btn-primary">
+                           Dettagli
+                         </Link>
                 </div>
               ))}
             </div>

@@ -1,164 +1,205 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Alert, Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
+import { Col, Container, Row, Card, Spinner, ListGroup } from 'react-bootstrap'
+import { Link, useParams, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
-const MovieDetails = () => {
-  const { movieId } = useParams(); // Prende il movieId dalla URL
-  const [movie, setMovie] = useState(null);
-  const [comments, setComments] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [newComment, setNewComment] = useState("");
-  const [rating, setRating] = useState("1");
+const MovieDetails = function () {
+  const params = useParams()
+  const navigate = useNavigate()
 
-  const OMDB_API_KEY = "339d3413"; // Sostituisci con la tua API Key
-  const OMDB_URL = `http://www.omdbapi.com/?apikey=${OMDB_API_KEY}&i=${movieId}`;
+  const [details, setDetails] = useState({})
+  const [isLoading, setIsLoading] = useState(true)
+  const [comments, setComments] = useState([])
+  const [isLoadingComments, setIsLoadingComments] = useState(true)
 
-  const COMMENTS_URL = `https://striveschool-api.herokuapp.com/api/comments/${movieId}`;
-  const AUTH_TOKEN = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2Y0ZWJhNzgxYjBkZDAwMTUwYTdhM2UiLCJpYXQiOjE3NDQyMDk4MjYsImV4cCI6MTc0NTQxOTQyNn0.dQPLbpvuTLXrohSc8CePEr1AC2qwaNPwvK9bL3OfOAs"; // Sostituisci con il tuo token di autenticazione
+  const [newComment, setNewComment] = useState({
+    comment: '',
+    rate: '',
+    elementId: params.movieId,
+  })
+
+  // Aggiorna elementId se cambia movieId
+  useEffect(() => {
+    setNewComment((prev) => ({ ...prev, elementId: params.movieId }))
+  }, [params.movieId])
+
+  // Fetch dettagli film
+  useEffect(() => {
+    const URLID = 'http://www.omdbapi.com/?apikey=339d3413&i=' + params.movieId
+
+    fetch(URLID)
+      .then((response) => response.json())
+      .then((singleMovie) => {
+        if (singleMovie.Response === 'False') {
+          setIsLoading(false)
+          navigate('/404')
+        } else {
+          setDetails(singleMovie)
+          setIsLoading(false)
+        }
+      })
+      .catch((error) => {
+        console.log('Errore nel fetch:', error)
+        setIsLoading(false)
+        navigate('/404')
+      })
+  }, [params.movieId, navigate])
+
+  // Fetch commenti
+  const fetchComments = () => {
+    const COMMENT_API =
+      'https://striveschool-api.herokuapp.com/api/comments/' + params.movieId
+
+    fetch(COMMENT_API, {
+      headers: {
+        Authorization:
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2Y0ZWJhNzgxYjBkZDAwMTUwYTdhM2UiLCJpYXQiOjE3NDQxNDYyNjAsImV4cCI6MTc0NTM1NTg2MH0.Vi1qyyeKsYpOGYsG5rdiWOiR6BhX8fVdxXQZ3sXiUr0',
+      },
+    })
+      .then((response) => response.json())
+      .then((comments) => {
+        setComments(comments)
+        setIsLoadingComments(false)
+      })
+      .catch((error) => {
+        console.log('Errore nel fetch dei commenti:', error)
+        setIsLoadingComments(false)
+      })
+  }
 
   useEffect(() => {
-    setIsLoading(true);
-    fetch(OMDB_URL)
-      .then((response) => {
-        if (!response.ok) {
-          setError("Errore nel recupero dei dettagli del film");
-          return;
-        }
-        return response.json();
-      })
-      .then((movieData) => {
-        setMovie(movieData);
-        setError(null);
-        fetch(COMMENTS_URL, {
-          headers: {
-            Authorization: AUTH_TOKEN,
-          },
-        })
-          .then((commentsRes) => {
-            if (!commentsRes.ok) {
-              setError("Errore nel recupero dei commenti");
-              return;
-            }
-            return commentsRes.json();
-          })
-          .then((commentsData) => {
-            setComments(commentsData);
-            setIsLoading(false);
-          })
-          .catch(() => {
-            setError("Errore durante il recupero dei commenti");
-            setIsLoading(false);
-          });
-      })
-      .catch(() => {
-        setError("Errore durante il recupero dei dettagli del film");
-        setIsLoading(false);
-      });
-  }, [movieId]);
+    fetchComments()
+  }, [params.movieId])
 
-  const handleCommentSubmit = (e) => {
-    e.preventDefault();
-    const newCommentData = {
-      comment: newComment,
-      rate: rating,
-      elementId: movieId,
-    };
+  // Invia commento
+  const sendComments = (e) => {
+    e.preventDefault()
 
-    fetch(COMMENTS_URL, {
+    const COMMENT_API = 'https://striveschool-api.herokuapp.com/api/comments/'
+
+    fetch(COMMENT_API, {
       method: 'POST',
+      body: JSON.stringify(newComment),
       headers: {
         'Content-Type': 'application/json',
-        Authorization: AUTH_TOKEN,
+        Authorization:
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2Y0ZWJhNzgxYjBkZDAwMTUwYTdhM2UiLCJpYXQiOjE3NDQxNDYyNjAsImV4cCI6MTc0NTM1NTg2MH0.Vi1qyyeKsYpOGYsG5rdiWOiR6BhX8fVdxXQZ3sXiUr0',
       },
-      body: JSON.stringify(newCommentData),
     })
-      .then((response) => {
-        if (!response.ok) {
-          setError("Errore nell'invio del commento");
-          return;
+      .then((res) => {
+        if (res.ok) {
+          alert('Commento inviato!')
+          setNewComment({ comment: '', rate: '', elementId: params.movieId })
+          fetchComments()
+        } else {
+          throw new Error("Errore nell'invio del commento")
         }
-        return response.json();
       })
-      .then((updatedComments) => {
-        setComments(updatedComments);
-        setNewComment("");
-        setRating("1");
+      .catch((err) => {
+        console.error(err)
+        alert("Si è verificato un errore durante l'invio del commento")
       })
-      .catch(() => {
-        setError("Errore nell'invio del commento");
-      });
-  };
-
-  if (isLoading) return <div className="m-5">Caricamento in corso...</div>;
-  if (error) return <Alert variant="danger" className="m-5">{error}</Alert>;
+  }
 
   return (
-    <main className='bg-dark d-flex flex-column min-vh-100'>
-    <Container className="my-4 bg-info py-5 my-2">
-      <Row>
-        <Col md={4}>
-          <Card>
-            <Card.Img variant="top" src={movie.Poster} alt={movie.Title} />
+    <Container fluid className="bg-dark text-white py-4">
+      <Row className="justify-content-center">
+        {/* Colonna della Card del film */}
+        <Col xs={12} md={6}>
+          {isLoading ? (
+            <Spinner variant="success" animation="border" />
+          ) : (
+            <Card className="text-center my-3">
+              <Card.Img
+                variant="top"
+                src={details.Poster}
+                className="d-block w-100"
+                style={{ height: '550px', objectFit: 'cover' }}
+              />
+              <Card.Body className="bg-info text-dark">
+                <Card.Title className="text-danger fs-4">
+                  Title: {details.Title}
+                </Card.Title>
+                <Card.Text className="fst-italic">
+                  Genre: {details.Genre}
+                </Card.Text>
+                <Card.Text>
+                  Ratings: {details.Ratings?.[0]?.Value}
+                </Card.Text>
+                <ListGroup className="mb-3">
+                  {isLoadingComments ? (
+                    <ListGroup.Item>Caricamento commenti...</ListGroup.Item>
+                  ) : comments.length > 0 ? (
+                    comments.map((comment) => (
+                      <ListGroup.Item key={comment._id}>
+                        {comment.comment} – <em>{comment.author}</em>
+                      </ListGroup.Item>
+                    ))
+                  ) : (
+                    <ListGroup.Item>Nessun commento trovato.</ListGroup.Item>
+                  )}
+                </ListGroup>
+                <Link to="/menu" className="btn btn-danger">
+                  Torna al menu!
+                </Link>
+              </Card.Body>
+            </Card>
+          )}
+        </Col>
+
+        {/* Colonna per inserimento commento */}
+        <Col xs={12} md={4}>
+          <Card className="bg-secondary text-white my-3">
             <Card.Body>
-              <Card.Title>{movie.Title}</Card.Title>
-              <Card.Text>
-                <strong>Anno:</strong> {movie.Year}<br />
-                <strong>Genere:</strong> {movie.Genre}<br />
-                <strong>Trama:</strong> {movie.Plot}<br />
-                <strong>Rating IMDB:</strong> {movie.imdbRating}
-              </Card.Text>
+              <Card.Title>Aggiungi un commento</Card.Title>
+              <form onSubmit={sendComments}>
+                <div className="mb-3">
+                  <label htmlFor="comment" className="form-label">
+                    Commento
+                  </label>
+                  <textarea
+                    id="comment"
+                    className="form-control"
+                    value={newComment.comment}
+                    required
+                    onChange={(e) =>
+                      setNewComment({
+                        ...newComment,
+                        comment: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="rate" className="form-label">
+                    Voto (1-5)
+                  </label>
+                  <select
+                    id="rate"
+                    className="form-select"
+                    value={newComment.rate}
+                    required
+                    onChange={(e) =>
+                      setNewComment({ ...newComment, rate: e.target.value })
+                    }
+                  >
+                    <option value="">Seleziona un voto</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+                <button type="submit" className="btn btn-light w-100">
+                  Invia Commento
+                </button>
+              </form>
             </Card.Body>
           </Card>
         </Col>
-        <Col md={8}>
-          <h4>Commenti</h4>
-          {comments.length > 0 ? (
-            <ul className="list-group">
-              {comments.map((comment, i) => (
-                <li className="list-group-item" key={i}>
-                  <strong>{comment.author}</strong>: {comment.comment} (Rating: {comment.rate})
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>Nessun commento disponibile.</p>
-          )}
-
-          {/* Form per inviare nuovi commenti */}
-          <h5>Aggiungi un commento:</h5>
-          <Form onSubmit={handleCommentSubmit}>
-            <Form.Group className="mb-3">
-              <Form.Label>Commento</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-                required
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Voto</Form.Label>
-              <Form.Control
-                as="select"
-                value={rating}
-                onChange={(e) => setRating(e.target.value)}
-              >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </Form.Control>
-            </Form.Group>
-            <Button variant="primary" type="submit">Aggiungi Commento</Button>
-          </Form>
-        </Col>
       </Row>
     </Container>
-    </main>
-  );
-};
+  )
+}
 
-export default MovieDetails;
+export default MovieDetails

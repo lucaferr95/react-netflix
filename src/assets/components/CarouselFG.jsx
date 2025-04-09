@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
 // URL della serie ST
 const FAMILYGUY = "https://www.omdbapi.com/?i=tt3896198&apikey=339d3413&s=family%20guy";
 
@@ -76,6 +76,9 @@ class CaroFG extends Component {
                     alt={film.Title}
                   />
                   <h5 className="text-info griffin-font">{film.Title}</h5>
+                  <Link to={`/movie/${film.imdbID}`} className="btn btn-primary">
+                            Dettagli
+                          </Link>
                 </div>
               ))}
             </div>
@@ -96,6 +99,9 @@ class CaroFG extends Component {
                     alt={film.Title}
                   />
                   <h5 className="griffin-font text-info">{film.Title}</h5>
+                   <Link to={`/movie/${film.imdbID}`} className="btn btn-primary">
+                            Dettagli
+                          </Link>
                 </div>
               ))}
             </div>

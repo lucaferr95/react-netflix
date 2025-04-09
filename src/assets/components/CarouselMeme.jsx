@@ -1,6 +1,7 @@
 import Fakefilms from '../Fakefilms/mememovies.json';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 const CarouselMeme = function() {
   return (
     <section id="caroFilms" className="d-flex flex-column gy-5 bg-black">
@@ -26,6 +27,7 @@ const CarouselMeme = function() {
                     alt={movie.title}
                   />
                   <h5 className="text-warning cmf ">{movie.title}</h5>
+                
                   <p className="text-white-50 fst-italic " >{movie.description}</p>
                 </div>
               ))}
