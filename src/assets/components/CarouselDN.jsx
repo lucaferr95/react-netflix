@@ -62,51 +62,56 @@ class CaroDN extends Component {
         
         <div className="carousel-inner">
         
-          <div className="carousel-item active">
-            <div className="row d-flex flex-nowrap row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gy-2 ">
-              {filmsST.slice(0, 4).map((film, index) => (
-                <div className="col" key={film.imdbID}>
-                  <img
-                    src={film.Poster} 
-                    className="d-block w-100"
-                    style={{
-                        width: "100%",
-                        height: "300px",
-                        objectFit: "cover",
-                    }}
-                    alt={film.Title}
-                  />
-                  <h5 className="text-light opacity-75 dnf">{film.Title}</h5>
-                   <Link to={`/movie/${film.imdbID}`} className="btn btn-primary">
-                            Dettagli
-                          </Link>
-                </div>
-              ))}
-            </div>
-          </div>
-        
-          <div className="carousel-item">
-            <div className="row d-flex flex-nowrap row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gy-2">
-              {filmsST.slice(5,10).map((film, index) => (
-                <div className="col" key={film.imdbID}>
-                  <img
-                    src={film.Poster} 
-                    className="d-block w-100"
-                    style={{
-                        width: "100%",
-                        height: "300px",
-                        objectFit: "cover",
-                    }}S
-                    alt={film.Title}
-                  />
-                  <h5 className="dnf text-light opacity-75">{film.Title}</h5>
-                  <Link to={`/movie/${film.imdbID}`} className="btn btn-primary">
-                           Dettagli
-                         </Link>
-                </div>
-              ))}
-            </div>
-          </div>
+             <div className="carousel-item active">
+           <div className="row d-flex flex-nowrap row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gy-2">
+             {filmsST.slice(0, 4).map((film, index) => (
+               <div className="col d-flex flex-column align-items-center" key={film.imdbID}>
+                 <img
+                   src={film.Poster} 
+                   className="d-block w-100"
+                   style={{
+                     width: "100%",
+                     height: "300px",
+                     objectFit: "cover",
+                   }}
+                   alt={film.Title}
+                 />
+                 <h5 className="text-danger nosifer-regular">{film.Title}</h5>
+                 
+                 {/* Bottone centrato */}
+                 <Link to={`/movie/${film.imdbID}`} className="btn btn-primary mt-2">
+                   Dettagli
+                 </Link>
+               </div>
+             ))}
+           </div>
+         </div>
+         
+                 
+         <div className="carousel-item">
+           <div className="row d-flex flex-nowrap row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gy-2">
+             {filmsST.slice(5, 9).map((film, index) => (
+               <div className="col d-flex flex-column align-items-center" key={film.imdbID}>
+                 <img
+                   src={film.Poster} 
+                   className="d-block w-100"
+                   style={{
+                     width: "100%",
+                     height: "300px",
+                     objectFit: "cover",
+                   }}
+                   alt={film.Title}
+                 />
+                 <h5 className="nosifer-regular text-danger">{film.Title}</h5>
+                 
+                 {/* Bottone centrato */}
+                 <Link to={`/movie/${film.imdbID}`} className="btn btn-primary mt-2">
+                   Dettagli
+                 </Link>
+               </div>
+             ))}
+           </div>
+         </div>
         </div>
         <button
           className="carousel-control-prev"
